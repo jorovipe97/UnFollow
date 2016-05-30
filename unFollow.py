@@ -1,6 +1,6 @@
 #Importando librerias
 from time import sleep
-from random import randint
+import random
 import tweepy
 from credenciales import *
 
@@ -44,19 +44,24 @@ print ("\nBuscando lista de cuentas que sigo")
 friends = limit_handled( tweepy.Cursor(api.friends).items() )
 print ("Lista de cuentas q sigo encontrada")
 
-for friend in friends:
-    print ("Buscando...")
+for friend in limit_handled( tweepy.Cursor(api.friends).items() ):
+    print ("Buscando...")    
     try:
         if friend.id not in followers:
-            if 2 < randint(0, 9) < 7:                
-                api.destroy_friendship(friend)
+            luckNumber = random.randint(0, 9)
+            print ("2 < %s = %s" % (luckNumber, 1 < luckNumber))
+            if 2 < luckNumber:                
+                api.destroy_friendship(friend.id)
                 print ("\nSe dejo de seguir a: %s, description: %s " % (friend.screen_name, friend.description))
             else:
                 print ("\n%s no me esta siguiendo pero lo seguire un rato mas" % friend.screen_name)
     except tweepy.RateLimitError:
+        print ("\nRate Limit Error, esperar 15 minutos")
         sleep(15*60)
     except tweepy.error.TweepError:
+        print ("\nTweepy error, continuar al siguiente")
         continue
     except StopIteration:
+        print ("StopIteration exception.... Bot finalizado")
         break
 
