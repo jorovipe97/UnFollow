@@ -6,7 +6,7 @@ import tweepy
 from credenciales import *
 
 ## Instrucciones de uso
-# Cree un archivo llamado credenciales y dentro defina y asignele el valor correspondiente a las siguientes variables:
+# Cree un archivo llamado credenciales.py y dentro defina y asignele el valor correspondiente a las siguientes variables:
 # USER_SCREEN_NAME
 # CONSUMER_KEY
 # CONSUMER_SECRET
@@ -18,7 +18,6 @@ print ("Identificando app")
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 print ("Dando pemriso")
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-print ("Secure == true")
 auth.secure = True;
 print ("Configurando auth en la api")
 api = tweepy.API(auth)
@@ -41,7 +40,7 @@ followers = api.followers_ids(user.screen_name)
 print ("Lista de seguidores cargada")
 
 for friend in limit_handled( tweepy.Cursor(api.friends).items() ):
-    print ("Buscando...")    
+    print ("Buscando usuarios que no siguen a @" + USER_SCREEN_NAME)    
     try:
         if friend.id not in followers:
             luckNumber = random.randint(0, 9)
