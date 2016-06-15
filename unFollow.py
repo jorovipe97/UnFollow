@@ -17,7 +17,6 @@ print ("Identificando app")
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 print ("Dando pemriso")
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-print ("Secure == true")
 auth.secure = True;
 print ("Configurando auth en la api")
 api = tweepy.API(auth)
