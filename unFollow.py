@@ -5,7 +5,7 @@ import tweepy
 from credenciales import *
 
 ## Instrucciones de uso
-# Cree un archivo llamado credenciales y dentro defina y asignele el valor correspondiente a las siguientes variables:
+# Cree un archivo llamado credenciales.py y dentro defina y asignele el valor correspondiente a las siguientes variables:
 # USER_SCREEN_NAME
 # CONSUMER_KEY
 # CONSUMER_SECRET
@@ -34,18 +34,8 @@ def limit_handled(cursor):
         except StopIteration:
         	break
 
-# Usuarios q siguen al usuario indicado
-print ("\nBuscando lista de seguidores")
-followers = api.followers_ids(user.screen_name)
-print ("Lista de seguidores cargada")
-
-# Lista de usuarios que sigue al usuario indicado
-print ("\nBuscando lista de cuentas que sigo")
-friends = limit_handled( tweepy.Cursor(api.friends).items() )
-print ("Lista de cuentas q sigo encontrada")
-
 for friend in limit_handled( tweepy.Cursor(api.friends).items() ):
-    print ("Buscando...")    
+    print ("Buscando usuarios que no siguen a @" + USER_SCREEN_NAME)    
     try:
         if friend.id not in followers:
             luckNumber = random.randint(0, 9)
