@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #Importando librerias
 from time import sleep
 import random
@@ -39,11 +40,6 @@ print ("\nBuscando lista de seguidores")
 followers = api.followers_ids(user.screen_name)
 print ("Lista de seguidores cargada")
 
-# Lista de usuarios que sigue al usuario indicado
-print ("\nBuscando lista de cuentas que sigo")
-friends = limit_handled( tweepy.Cursor(api.friends).items() )
-print ("Lista de cuentas q sigo encontrada")
-
 for friend in limit_handled( tweepy.Cursor(api.friends).items() ):
     print ("Buscando...")    
     try:
@@ -64,4 +60,7 @@ for friend in limit_handled( tweepy.Cursor(api.friends).items() ):
     except StopIteration:
         print ("StopIteration exception.... Bot finalizado")
         break
-
+    except UnicodeEncodeError:
+        print ("\nError de codificado detectado\n")
+        continue
+print ("...Bot finalizdo")
